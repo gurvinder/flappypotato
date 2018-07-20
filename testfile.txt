@@ -1,5 +1,2 @@
-hello!
-gurvinder
-=======
 hello! jonathan
->>>>>>> f156e65e1d5af1fc94361b6c0b82d0f954389abe
+gurvinder
