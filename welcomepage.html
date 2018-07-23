@@ -17,7 +17,8 @@
   function startGame() {
       myGameArea.start();
       mypotato = new component();
-      obstacle = new setObstacle(10, 200, "green", 300, 300);
+      obstacle = setInterval(setObstacle(), 100000);
+      // 10, 200, "green", 300, 300
   }
 
   var myGameArea = {
@@ -30,21 +31,26 @@
           document.body.insertBefore(this.canvas, document.body.childNodes[0]);
       }
   }
+
   
-  function setObstacle(width, height, color, x, y) {
+  function setObstacle() {
+    // width, height, color, x, y
     ctx.beginPath();
-    this.width = width;
-    this.height = height;
     this.speedX = 0;
     this.speedY = 0;
-    this.x = x;
-    this.y = y;
-    ctx.fillStyle = color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.x = 300;
+    this.y = 300;
+    this.width = 10;
+    this.height = 200;
+    ctx.fillStyle = "red";
 
-
-
+    for (let i=0; i<200; i++)
+    {
+      this.x -= this.speedX;
+      this.speedX++;
+      ctx.fillRect(this.x, this.y, this.width, this.height);
   }
+}
 
   function component() {
       ctx = myGameArea.context;
