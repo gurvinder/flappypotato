@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Flappy Potato Home</title>
   </head>
-  <body>
+  <body onload="startGame()">
     <div class="">
       <p><strong>This should be the main page<strong/></p>
     </div>
@@ -13,22 +13,46 @@
   </body>
 
   <script>
+  var mypotato;
+  function startGame() {
+      myGameArea.start();
+      mypotato = new component(30, 30, "red", 10, 120);
+  }
 
-    function move(){
+  var myGameArea = {
+      canvas : document.createElement("canvas"),
+      start : function() {
+          this.canvas.width = 480;
+          this.canvas.height = 270;
+          this.canvas.color = #800000;
+          this.context = this.canvas.getContext("2d");
+          document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+      }
+  }
+  function component(width, height, color, x, y) {
+      this.width = width;
+      this.height = height;
+      this.x = x;
+      this.y = y;
+      ctx = myGameArea.context;
+      ctx.fillStyle = color;
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+//   function component() {
+//     ctx = myGameArea.context;
+//     ctx.beginPath();
+//     ctx.arc(80,150,40,0,2*Math.PI);
+//     ctx.stroke();
+//     ctx.fillStyle = red;
+// }
 
-
-
-
-
-    }
-
-    var canvas = document.getElementById("myCanvas");
-    var ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#FF0000";
-    ctx.beginPath();
-    ctx.arc(80,250,40,0,2*Math.PI);
-    ctx.stroke();
-    </script>
+    // var canvas = document.getElementById("myCanvas");
+    // var ctx = canvas.getContext("2d");
+    // ctx.fillStyle = "#FF0000";
+    // ctx.beginPath();
+    // ctx.arc(80,250,40,0,2*Math.PI);
+    // ctx.stroke();
+ </script>
 
 
 </html>
