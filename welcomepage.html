@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href="static/welcomepage.css">
     <meta charset="utf-8">
     <title>Flappy Potato Home</title>
   </head>
@@ -8,5 +9,26 @@
     <div class="">
       <p><strong>This should be the main page<strong/></p>
     </div>
+    <canvas id="myCanvas" width="800" height="500"></canvas>
   </body>
+
+  <script>
+
+    function move(){
+
+
+
+
+
+    }
+
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#FF0000";
+    ctx.beginPath();
+    ctx.arc(80,250,40,0,2*Math.PI);
+    ctx.stroke();
+    </script>
+
+
 </html>
