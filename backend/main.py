@@ -8,7 +8,7 @@ os.path.dirname(__file__)), extensions=['jinja2.ext.autoescape'], autoescape=Tru
 class WelcomePage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_current_directory.get_template('..//welcomepage.html')
+        template = jinja_current_directory.get_template(os.chdir('..'))
         self.response.write(template.render())
 
 app = webapp2.WSGIApplication([('/', WelcomePage)], debug=True)
