@@ -1,64 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <link rel="stylesheet" href="static/welcomepage.css">
-    <meta charset="utf-8">
-    <title>Flappy Potato Home</title>
-  </head>
-  <body onload="startGame()">
-    <div class="">
-      <p><strong>This should be the main page<strong/></p>
-    </div>
-    <!-- <canvas id="myCanvas" width="800" height="500"></canvas> -->
-  </body>
+  <head><title>Flappy Potato</title></head>
+  <body onload="begin()">
 
-  <script>
-  var mypotato;
-  function startGame() {
-      myGameArea.start();
-      mypotato = new component();
-      obstacle = setInterval(setObstacle(), 100000);
-      // 10, 200, "green", 300, 300
-  }
-
-  var myGameArea = {
-      canvas : document.createElement("canvas"),
-      start : function() {
-          this.canvas.width = 800;
-          this.canvas.height = 500;
-          this.canvas.style.background="blue";
-          this.context = this.canvas.getContext("2d");
-          document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-      }
-  }
-
-  
-  function setObstacle() {
-    // width, height, color, x, y
-    ctx.beginPath();
-    this.speedX = 0;
-    this.speedY = 0;
-    this.x = 300;
-    this.y = 300;
-    this.width = 10;
-    this.height = 200;
-    ctx.fillStyle = "red";
-
-    for (let i=0; i<200; i++)
-    {
-      this.x -= this.speedX;
-      this.speedX++;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
-  }
-}
-
-  function component() {
-      ctx = myGameArea.context;
-      ctx.beginPath();
-      ctx.arc(60,220,40,0,2*Math.PI);
-      ctx.stroke();
-  }
- </script>
+<canvas id="canvas" width=800 height=500></canvas>
 
 
-</html>
+    <script>
+        let canvas=document.getElementById("canvas");
+        let context=canvas.getContext("2d");
+        let frame = 0;
+
+        var allObstacles=[];
+
+        function begin(){
+              requestAnimationFrame(animate);
+        }
+
+        function animate(time){
+          frame++;
+          if(frame == 1 || frame % 300 == 0){
+            //var a = Math.floor(Math.random() * (Math.floor(max) - Math.floor(50))) + Math.floor(50);
+            allObstacles.push({x: canvas.width, y: 0, width:40, height: 175, velocity: -1});
+            allObstacles.push({x: canvas.width, y: canvas.height-195, width:40, height: 175, velocity: -1});
+          }
+          for(let i = 0; i < allObstacles.length; i++){
+            allObstacles[i].x += allObstacles[i].velocity;}
+          draw();
+          requestAnimationFrame(animate);}
+
+        function draw(){
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = "#000000";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+          for(let i = 0; i <allObstacles.length; i++){
+            context.fillStyle = "#00ff00";
+            context.fillRect(allObstacles[i].x, allObstacles[i].y, allObstacles[i].width, allObstacles[i].height);}}
+
+    </script>
+</body></html>
