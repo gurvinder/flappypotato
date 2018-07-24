@@ -11,6 +11,7 @@
         let horizontalgap = 225;
         let verticalgap = 0
         let allObstacles=[];
+        let userProperties = {x: 0, y: 0, width: 0, height: 0};
 
         function begin(){requestAnimationFrame(animate);}
 
@@ -39,6 +40,12 @@
           context.fillRect(allObstacles[i].x, allObstacles[i].y, allObstacles[i].width, allObstacles[i].height);}}
 
         function animateUser(){
-          
+
+        }
+
+        function collisionDetection(){
+          for (var i = 0; i < allObstacles.length; i++) {
+            allObstacles[i]
+          }
         }
     </script></body></html>
