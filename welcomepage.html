@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head><title>Flappy Potato</title></head>
-  <body onload="requestAnimationFrame(animate)">
+  <body onload="animate()" style="margin:0;padding:0">
 
-<canvas id="canvas" width=800 height=500 style="position:absolute "></canvas>
+<canvas id="canvas" width=1000 height=700 style="position:relative"></canvas>
     <script>
         let canvas=document.getElementById("canvas");
+        canvas.style.left = (window.innerWidth - canvas.width - 8) + "px";
+        canvas.style.top = "8px";
         let context = canvas.getContext("2d");
         let frame = 0;
         let horizontalgap = 225;
         let verticalgap = 0
         let allObstacles=[];
+        let background = new Image()
         let userImage = new Image()
         userImage.src = 'static/imgs/potato.png';
-        let userProperties = {x: 0, y: 0, width: 0, height: 0};
+        let userProperties = {x: 0, y: 425, width: 125, height: 125};
+        let requestId = undefined;
 
         function animate(time){
           frame++;
@@ -25,34 +29,34 @@
           for(let i = 0; i < allObstacles.length; i++){
             allObstacles[i].x += allObstacles[i].velocity;}
 
-          if(allObstacles.length >= 10){allObstacles.shift();}
+          if(allObstacles.length > 15){allObstacles.shift();}
 
           context.clearRect(0, 0, canvas.width, canvas.height);
           context.fillStyle = "#000000";
           context.fillRect(0, 0, canvas.width, canvas.height);
           animateObstacles();
           animateUser();
-          requestAnimationFrame(animate);}
+          if(!collisionDetection()){
+            window.requestAnimationFrame(animate);}}
 
         function animateObstacles(){
           for(let i = 0; i < allObstacles.length; i++){
               context.fillStyle = "#00ff00";
               context.fillRect(allObstacles[i].x, allObstacles[i].y, allObstacles[i].width, allObstacles[i].height);}}
 
-        function animateUser(){context.drawImage(userImage, 0, 0, 125, 125);}
+        function animateUser(){context.drawImage(userImage, userProperties.x, userProperties.y, userProperties.width, userProperties.height);}
 
-        function collisionDetection(){
-          let leftUserAnchor = userProperties.x;
-          let rightUserAnchor = userProperties.x + userProperties.width;
-          let topUserAnchor = userProperties.y;
-          let bottomUserAnchor = userProperties.y + userProperties.height;
-          for (let i = 0; i < allObstacles.length; i++){
-        //     // if(leftUserAnchor > ){
-        //     //
-        //     if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
-        //     crash = false;
-        // }
-        //     // }
-          }
-        }
+          function collisionDetection(){
+            let leftUserAnchor = userProperties.x;
+            let rightUserAnchor = userProperties.x + userProperties.width;
+            let topUserAnchor = userProperties.y;
+            let bottomUserAnchor = userProperties.y + userProperties.height;
+            for (let i = 0; i < allObstacles.length; i++){
+              let isLeftCollision = (leftUserAnchor <= (allObstacles[i].x + allObstacles[i].width) && leftUserAnchor >= allObstacles[i].x);
+              let isRightCollision = (rightUserAnchor >= allObstacles[i].x) && (rightUserAnchor <= (allObstacles[i].x + allObstacles[i].width));
+              let isTopCollision = ((topUserAnchor <= (allObstacles[i].y + allObstacles[i].height)) && topUserAnchor >= allObstacles[i].y);
+              let isBottomCollision = ((bottomUserAnchor >= allObstacles[i].y) && bottomUserAnchor <= (allObstacles[i].y + allObstacles[i].height));
+              if(isRightCollision && (isTopCollision || isBottomCollision)){return true;}
+              if(isLeftCollision && (isTopCollision || isBottomCollision)){return true;}}
+            return false;}
     </script></body></html>
