@@ -4,23 +4,15 @@
   <body onload="begin()">
 
 <canvas id="canvas" width=800 height=500></canvas>
-
-
     <script>
         let canvas=document.getElementById("canvas");
         let context=canvas.getContext("2d");
         let frame = 0;
         let horizontalgap = 225;
         let verticalgap = 0
+        let allObstacles=[];
 
-        var allObstacles=[];
-
-        function begin(){
-              requestAnimationFrame(animate);
-              var myImage = new Image(100, 100);
-              myImage.src = 'potato.png';
-
-        }
+        function begin(){requestAnimationFrame(animate);}
 
         function animate(time){
           frame++;
@@ -49,6 +41,4 @@
         function animateUser(){
           
         }
-
-    </script>
-</body></html>
+    </script></body></html>
