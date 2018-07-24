@@ -10,32 +10,45 @@
         let canvas=document.getElementById("canvas");
         let context=canvas.getContext("2d");
         let frame = 0;
+        let horizontalgap = 225;
+        let verticalgap = 0
 
         var allObstacles=[];
 
         function begin(){
               requestAnimationFrame(animate);
+              var myImage = new Image(100, 100);
+              myImage.src = 'potato.png';
+
         }
 
         function animate(time){
           frame++;
-          if(frame == 1 || frame % 300 == 0){
+          if(frame == 1 || frame % horizontalgap == 0){
             //var a = Math.floor(Math.random() * (Math.floor(max) - Math.floor(50))) + Math.floor(50);
             allObstacles.push({x: canvas.width, y: 0, width:40, height: 175, velocity: -1});
-            allObstacles.push({x: canvas.width, y: canvas.height-195, width:40, height: 175, velocity: -1});
-          }
+            allObstacles.push({x: canvas.width, y: canvas.height-195, width:40, height: canvas.height, velocity: -1});}
+
           for(let i = 0; i < allObstacles.length; i++){
             allObstacles[i].x += allObstacles[i].velocity;}
-          draw();
+
+          if(allObstacles.length == 10){allObstacles.shift();}
+
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.fillStyle = "#000000";
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          animateObstacles();
+          animateUser();
           requestAnimationFrame(animate);}
 
-        function draw(){
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fillStyle = "#000000";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-          for(let i = 0; i <allObstacles.length; i++){
-            context.fillStyle = "#00ff00";
-            context.fillRect(allObstacles[i].x, allObstacles[i].y, allObstacles[i].width, allObstacles[i].height);}}
+        function animateObstacles(){
+        for(let i = 0; i < allObstacles.length; i++){
+          context.fillStyle = "#00ff00";
+          context.fillRect(allObstacles[i].x, allObstacles[i].y, allObstacles[i].width, allObstacles[i].height);}}
+
+        function animateUser(){
+          
+        }
 
     </script>
 </body></html>
