@@ -11,4 +11,10 @@ class WelcomePage(webapp2.RequestHandler):
         template = jinja_current_directory.get_template('welcomepage.html')
         self.response.write(template.render())
 
-app = webapp2.WSGIApplication([('/', WelcomePage)], debug=True)
+class GamePage(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_current_directory.get_template('flappypotato.html')
+        self.response.write(template.render())
+
+app = webapp2.WSGIApplication([('/', WelcomePage), ('/game', GamePage)], debug=True)

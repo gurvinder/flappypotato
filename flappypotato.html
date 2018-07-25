@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head><title>Flappy Potato</title></head>
+  <body onload="animate()" style="margin:0;padding:0; display:inline-block;">
+    <h1 name="score"id="score"style="margin:0;padding:0;display:inline-block;">Score:</h1>
+<canvas id="canvas" width=1000 height=700 style="position:relative"></canvas><script>
+        let canvas=document.getElementById("canvas");
+        score.style.left = "200px";
+        canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";
+        canvas.style.top = "8px";
+        let context = canvas.getContext("2d");
+        let frame = 0;
+        let horizontalgap = 250;
+        let verticalgap = 250;
+        let allObstacles=[];
+        let background = new Image()
+        let userImage = new Image()
+        userImage.src = 'static/imgs/potato.png';
+        let userProperties = {x: 0, y: 200, width: 125, height: 75, velocity: 0};
+        let pipeMin = 50;
+        let gravity = 50;
+
+        function animate(time){
+          frame++;
+          if(frame == 1 || frame % horizontalgap == 0){
+            allObstacles.push({x: canvas.width, y: 0, width: 40, height: pipeMin + Math.floor(Math.random() * 350) + 1, velocity: -1});
+            allObstacles.push({x: canvas.width, y: allObstacles[allObstacles.length - 1].height + verticalgap, width:40, height: canvas.height - allObstacles[allObstacles.length - 1].y, velocity: -1});}
+
+          for(let i = 0; i < allObstacles.length; i++){
+            allObstacles[i].x += allObstacles[i].velocity;}
+
+          if(allObstacles.length > 15){allObstacles.shift();}
+
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.fillStyle = "#1e1e1e";
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          animateObstacles();
+          animateUser();
+          if(!collisionDetection()){
+            window.requestAnimationFrame(animate);}}
+
+        function animateObstacles(){
+          for(let i = 0; i < allObstacles.length; i++){
+              context.fillStyle = "#228B22";
+              context.fillRect(allObstacles[i].x, allObstacles[i].y, allObstacles[i].width, allObstacles[i].height);}}
+
+        function animateUser(){
+          context.drawImage(userImage, userProperties.x, (userProperties.y), userProperties.width, userProperties.height);}
+
+          function collisionDetection(){
+            let leftUserAnchor = userProperties.x;
+            let rightUserAnchor = userProperties.x + userProperties.width;
+            let topUserAnchor = userProperties.y;
+            let bottomUserAnchor = userProperties.y + userProperties.height;
+            for (let i = 0; i < allObstacles.length; i++){
+              let isLeftCollision = (leftUserAnchor <= (allObstacles[i].x + allObstacles[i].width) && leftUserAnchor >= allObstacles[i].x);
+              let isRightCollision = (rightUserAnchor >= allObstacles[i].x) && (rightUserAnchor <= (allObstacles[i].x + allObstacles[i].width));
+              let isTopCollision = ((topUserAnchor <= (allObstacles[i].y + allObstacles[i].height)) && topUserAnchor >= allObstacles[i].y);
+              let isBottomCollision = ((bottomUserAnchor >= allObstacles[i].y) && bottomUserAnchor <= (allObstacles[i].y + allObstacles[i].height));
+              if(isRightCollision && (isTopCollision || isBottomCollision)){return true;}
+              if(isLeftCollision && (isTopCollision || isBottomCollision)){return true;}
+              if(bottomUserAnchor > canvas.height){return true;}
+              if(topUserAnchor < 0){return true;}}
+            return false;}
+
+
+            document.addEventListener('keydown',(event)=>{
+              if(event.key == " "){
+                userProperties.y+=10;}
+            });
+
+            window.addEventListener("resize", function(){
+              if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
+              else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false)
+    </script></body></html>
