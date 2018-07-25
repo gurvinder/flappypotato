@@ -8,14 +8,13 @@
         canvas.style.top = "8px";
         let context = canvas.getContext("2d");
         let frame = 0;
-        let horizontalgap = 225;
-        let verticalgap = 200;
+        let horizontalgap = 250;
+        let verticalgap = 250;
         let allObstacles=[];
         let background = new Image()
         let userImage = new Image()
         userImage.src = 'static/imgs/potato.png';
-        let userProperties = {x: 0, y: 425, width: 125, height: 125};
-        let requestId = undefined;
+        let userProperties = {x: 0, y: 200, width: 125, height: 75, velocity: 0};
         let pipeMin = 50;
 
         function animate(time){
@@ -42,7 +41,9 @@
               context.fillStyle = "#228B22";
               context.fillRect(allObstacles[i].x, allObstacles[i].y, allObstacles[i].width, allObstacles[i].height);}}
 
-        function animateUser(){context.drawImage(userImage, userProperties.x, userProperties.y, userProperties.width, userProperties.height);}
+        function animateUser(){
+          context.drawImage(userImage, userProperties.x, userProperties.y, userProperties.width, userProperties.height);
+        }
 
           function collisionDetection(){
             let leftUserAnchor = userProperties.x;
@@ -58,7 +59,15 @@
               if(isLeftCollision && (isTopCollision || isBottomCollision)){return true;}}
             return false;}
 
-          window.addEventListener("resize", function(){
-            if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
-            else{canvas.style.left = (window.innerWidth - canvas.width - 8) + "px";}}, false)
+
+            document.addEventListener('keydown', (event) => {
+              if(event.key == "w"){
+                userProperties.y-=10;
+              }else if(event.key = "s"){
+                userProperties.y+=10;}
+            });
+
+            window.addEventListener("resize", function(){
+              if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
+              else{canvas.style.left = (window.innerWidth - canvas.width - 8) + "px";}}, false)
     </script></body></html>
