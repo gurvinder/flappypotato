@@ -9,9 +9,11 @@
     <canvas id="canvas" width=1000 height=700 style="position:relative"></canvas>
     <script>
       //global constants
-      let HORIZONTALSPACING = 250;
+      let HORIZONTALSPACING = 300;
       let VERTICALGAP = 250;
       let PIPEMINIMUM = 50;
+      let HURDLEVELOCITY = -6;
+      let MAXHURDLES = 100;
 
       //graphics elements
       let canvas = document.getElementById("canvas");
@@ -26,7 +28,7 @@
       let frame = 0;
 
       //images and their properties
-      let backgroundImage = new Image(canvas.width, canvas.height);
+      let backgroundImage = new Image();
       backgroundImage.src = "static/imgs/background.jpg";
 
       let userImage = new Image(userProperties.width, userProperties.height);
@@ -37,13 +39,13 @@
         canvas.style.left = (window.innerWidth - canvas.width - scoreLabel.offsetWidth - 8) + "px";
         canvas.style.top = "8px";
 
-        animate();
-      }
+        //start flappy bird
+        animate();}
 
       function animate(time){
-        if((frame == 0) || (frame % HORIZONTALSPACING == 0)){
-          allHurdles.push({x: canvas.width, y: 0, width: 40, height: PIPEMINIMUM + Math.floor(Math.random() * 350) + 1, velocity: -1});
-          allHurdles.push({x: canvas.width, y: allHurdles[allHurdles.length - 1].height + VERTICALGAP, width:40, height: canvas.height - allHurdles[allHurdles.length - 1].y, velocity: -1});}
+        if((frame == 0) || (frame % (HORIZONTALSPACING) == 0)){
+          allHurdles.push({x: canvas.width, y: 0, width: 40, height: PIPEMINIMUM + Math.floor(Math.random() * 350) + 1, velocity: HURDLEVELOCITY});
+          allHurdles.push({x: canvas.width, y: allHurdles[allHurdles.length - 1].height + VERTICALGAP, width:40, height: canvas.height - allHurdles[allHurdles.length - 1].y, velocity: HURDLEVELOCITY});}
 
         //used to set the score
         document.querySelector('#score').innerHTML = "Score: " + frame;
@@ -55,20 +57,20 @@
         for(let i = 0; i < allHurdles.length; i++){allHurdles[i].x += allHurdles[i].velocity;}
 
         //for data efficiency -- reduces total saved hurdles
-        if(allHurdles.length > 15){allHurdles.shift();}
+        if(allHurdles.length > MAXHURDLES){allHurdles.shift();}
 
         //clears the screen and begins drawing user and hurdles
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         //places backgound image into canvas
-        context.drawImage(backgroundImage, 0, 0);
+        context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
         //preformes updates to all properties
         animateHurdles();
         animateUser();
 
         //updates the interator
-        frame++;
+        frame += -(HURDLEVELOCITY);
 
         //checks if any objects have collided and determines if loop should continue
         if(!collisionDetection()){window.requestAnimationFrame(animate);}}
@@ -103,8 +105,8 @@
 
         //used to update user properties
         document.addEventListener('keydown',(event)=>{
-          if(event.key == "w"){userProperties.y-=10;}
-          else if(event.key == "s"){userProperties.y+=10;}});
+          if(event.key == "w"){userProperties.y-=20;}
+          else if(event.key == "s"){userProperties.y+=20;}});
 
         //used to adjust spacing between the canvas and sides
         window.addEventListener("resize", function(){
