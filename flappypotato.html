@@ -5,7 +5,6 @@
     <h1 name="score"id="score"style="margin:0;padding:0;display:inline-block;">Score:</h1>
 <canvas id="canvas" width=1000 height=700 style="position:relative"></canvas><script>
         let canvas=document.getElementById("canvas");
-        score.style.left = "200px";
         canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";
         canvas.style.top = "8px";
         let context = canvas.getContext("2d");
@@ -16,7 +15,7 @@
         let background = new Image()
         let userImage = new Image()
         userImage.src = 'static/imgs/potato.png';
-        let userProperties = {x: 0, y: 200, width: 125, height: 75, velocity: 0};
+        let userProperties = {x: 100, y: 200, width: 125, height: 75, velocity: 0};
         let pipeMin = 50;
         let gravity = 50;
 
@@ -25,6 +24,9 @@
           if(frame == 1 || frame % horizontalgap == 0){
             allObstacles.push({x: canvas.width, y: 0, width: 40, height: pipeMin + Math.floor(Math.random() * 350) + 1, velocity: -1});
             allObstacles.push({x: canvas.width, y: allObstacles[allObstacles.length - 1].height + verticalgap, width:40, height: canvas.height - allObstacles[allObstacles.length - 1].y, velocity: -1});}
+
+          document.querySelector('#score').innerHTML = "Score: " + frame;
+          canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";
 
           for(let i = 0; i < allObstacles.length; i++){
             allObstacles[i].x += allObstacles[i].velocity;}
@@ -63,13 +65,13 @@
               if(topUserAnchor < 0){return true;}}
             return false;}
 
-
             document.addEventListener('keydown',(event)=>{
-              if(event.key == " "){
-                userProperties.y+=10;}
-            });
+              if(event.key == "w"){
+                userProperties.y-=10;
+              }else if(event.key == "s"){
+                userProperties.y+=10;}});
 
             window.addEventListener("resize", function(){
               if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
-              else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false)
+              else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false);
     </script></body></html>

@@ -16,6 +16,7 @@ class GamePage(webapp2.RequestHandler):
     def post(self):
         if self.request.get('username'):
             User(username=self.request.get('username')).put()
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_current_directory.get_template('flappypotato.html')
         self.response.write(template.render())
 
