@@ -1,77 +1,115 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head><title>Flappy Potato</title></head>
+  <head>
+    <title>Flappy Potato</title>
+  </head>
   <body onload="animate()" style="margin:0;padding:0; display:inline-block;">
-    <h1 name="score"id="score"style="margin:0;padding:0;display:inline-block;">Score:</h1>
-<canvas id="canvas" width=1000 height=700 style="position:relative"></canvas><script>
-        let canvas=document.getElementById("canvas");
-        canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";
+    <h1 id="score"style="margin:0;padding:0;display:inline-block;">Score:</h1>
+
+    <canvas id="canvas" width=1000 height=700 style="position:relative"></canvas>
+    <script>
+      //global constants
+      let HORIZONTALSPACING = 250;
+      let VERTICALGAP = 250;
+      let PIPEMINIMUM = 50;
+
+      //graphics elements
+      let canvas = document.getElementById("canvas");
+      let context = canvas.getContext("2d");
+      let scoreLabel = document.querySelector('#score');
+
+      //continuously updated elements
+      let allHurdles = [];
+      let userProperties = {x: 100, y: 200, width: 125, height: 75, velocity: 0};
+
+      //interator
+      let frame = 0;
+
+      //images and their properties
+      let backgroundImage = new Image(canvas.width, canvas.height);
+      backgroundImage.src = "static/imgs/background.jpg";
+
+      let userImage = new Image(userProperties.width, userProperties.height);
+      userImage.src = 'static/imgs/potato.png';
+
+      function begin(){
+        //canvas location adjustments
+        canvas.style.left = (window.innerWidth - canvas.width - scoreLabel.offsetWidth - 8) + "px";
         canvas.style.top = "8px";
-        let context = canvas.getContext("2d");
-        let frame = 0;
-        let horizontalgap = 250;
-        let verticalgap = 250;
-        let allObstacles=[];
-        let background = new Image()
-        let userImage = new Image()
-        userImage.src = 'static/imgs/potato.png';
-        let userProperties = {x: 100, y: 200, width: 125, height: 75, velocity: 0};
-        let pipeMin = 50;
-        let gravity = 50;
 
-        function animate(time){
-          frame++;
-          if(frame == 1 || frame % horizontalgap == 0){
-            allObstacles.push({x: canvas.width, y: 0, width: 40, height: pipeMin + Math.floor(Math.random() * 350) + 1, velocity: -1});
-            allObstacles.push({x: canvas.width, y: allObstacles[allObstacles.length - 1].height + verticalgap, width:40, height: canvas.height - allObstacles[allObstacles.length - 1].y, velocity: -1});}
+        animate();
+      }
 
-          document.querySelector('#score').innerHTML = "Score: " + frame;
-          canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";
+      function animate(time){
+        if((frame == 0) || (frame % HORIZONTALSPACING == 0)){
+          allHurdles.push({x: canvas.width, y: 0, width: 40, height: PIPEMINIMUM + Math.floor(Math.random() * 350) + 1, velocity: -1});
+          allHurdles.push({x: canvas.width, y: allHurdles[allHurdles.length - 1].height + VERTICALGAP, width:40, height: canvas.height - allHurdles[allHurdles.length - 1].y, velocity: -1});}
 
-          for(let i = 0; i < allObstacles.length; i++){
-            allObstacles[i].x += allObstacles[i].velocity;}
+        //used to set the score
+        document.querySelector('#score').innerHTML = "Score: " + frame;
 
-          if(allObstacles.length > 15){allObstacles.shift();}
+        //used to update the spacing after score update
+        canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";
 
-          context.clearRect(0, 0, canvas.width, canvas.height);
-          context.fillStyle = "#1e1e1e";
-          context.fillRect(0, 0, canvas.width, canvas.height);
-          animateObstacles();
-          animateUser();
-          if(!collisionDetection()){
-            window.requestAnimationFrame(animate);}}
+        //used to update positions of all hurdles based on velocity
+        for(let i = 0; i < allHurdles.length; i++){allHurdles[i].x += allHurdles[i].velocity;}
 
-        function animateObstacles(){
-          for(let i = 0; i < allObstacles.length; i++){
-              context.fillStyle = "#228B22";
-              context.fillRect(allObstacles[i].x, allObstacles[i].y, allObstacles[i].width, allObstacles[i].height);}}
+        //for data efficiency -- reduces total saved hurdles
+        if(allHurdles.length > 15){allHurdles.shift();}
 
-        function animateUser(){
-          context.drawImage(userImage, userProperties.x, (userProperties.y), userProperties.width, userProperties.height);}
+        //clears the screen and begins drawing user and hurdles
+        context.clearRect(0, 0, canvas.width, canvas.height);
 
-          function collisionDetection(){
-            let leftUserAnchor = userProperties.x;
-            let rightUserAnchor = userProperties.x + userProperties.width;
-            let topUserAnchor = userProperties.y;
-            let bottomUserAnchor = userProperties.y + userProperties.height;
-            for (let i = 0; i < allObstacles.length; i++){
-              let isLeftCollision = (leftUserAnchor <= (allObstacles[i].x + allObstacles[i].width) && leftUserAnchor >= allObstacles[i].x);
-              let isRightCollision = (rightUserAnchor >= allObstacles[i].x) && (rightUserAnchor <= (allObstacles[i].x + allObstacles[i].width));
-              let isTopCollision = ((topUserAnchor <= (allObstacles[i].y + allObstacles[i].height)) && topUserAnchor >= allObstacles[i].y);
-              let isBottomCollision = ((bottomUserAnchor >= allObstacles[i].y) && bottomUserAnchor <= (allObstacles[i].y + allObstacles[i].height));
-              if(isRightCollision && (isTopCollision || isBottomCollision)){return true;}
-              if(isLeftCollision && (isTopCollision || isBottomCollision)){return true;}
-              if(bottomUserAnchor > canvas.height){return true;}
-              if(topUserAnchor < 0){return true;}}
-            return false;}
+        //places backgound image into canvas
+        context.drawImage(backgroundImage, 0, 0);
 
-            document.addEventListener('keydown',(event)=>{
-              if(event.key == "w"){
-                userProperties.y-=10;
-              }else if(event.key == "s"){
-                userProperties.y+=10;}});
+        //preformes updates to all properties
+        animateHurdles();
+        animateUser();
 
-            window.addEventListener("resize", function(){
-              if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
-              else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false);
-    </script></body></html>
+        //updates the interator
+        frame++;
+
+        //checks if any objects have collided and determines if loop should continue
+        if(!collisionDetection()){window.requestAnimationFrame(animate);}}
+
+      function animateHurdles(){
+        for(let i = 0; i < allHurdles.length; i++){
+            context.fillStyle = "#228B22";
+            context.fillRect(allHurdles[i].x, allHurdles[i].y, allHurdles[i].width, allHurdles[i].height);}}
+
+      function animateUser(){
+        context.drawImage(userImage, userProperties.x, (userProperties.y), userProperties.width, userProperties.height);}
+
+      function collisionDetection(){
+        //anchors used for hitbox detection
+        let leftUserAnchor = userProperties.x;
+        let rightUserAnchor = userProperties.x + userProperties.width;
+        let topUserAnchor = userProperties.y;
+        let bottomUserAnchor = userProperties.y + userProperties.height;
+        //used to loop through all hurdles and verify that no collisions have occured
+        for (let i = 0; i < allHurdles.length; i++){
+          let isLeftCollision = (leftUserAnchor <= (allHurdles[i].x + allHurdles[i].width) && leftUserAnchor >= allHurdles[i].x);
+          let isRightCollision = (rightUserAnchor >= allHurdles[i].x) && (rightUserAnchor <= (allHurdles[i].x + allHurdles[i].width));
+          let isTopCollision = ((topUserAnchor <= (allHurdles[i].y + allHurdles[i].height)) && topUserAnchor >= allHurdles[i].y);
+          let isBottomCollision = ((bottomUserAnchor >= allHurdles[i].y) && bottomUserAnchor <= (allHurdles[i].y + allHurdles[i].height));
+          //returns true if collisions have occured
+          if(isRightCollision && (isTopCollision || isBottomCollision)){return true;}
+          if(isLeftCollision && (isTopCollision || isBottomCollision)){return true;}
+          if(bottomUserAnchor > canvas.height){return true;}
+          if(topUserAnchor < 0){return true;}}
+        //returns false if collisions have not occured
+        return false;}
+
+        //used to update user properties
+        document.addEventListener('keydown',(event)=>{
+          if(event.key == "w"){userProperties.y-=10;}
+          else if(event.key == "s"){userProperties.y+=10;}});
+
+        //used to adjust spacing between the canvas and sides
+        window.addEventListener("resize", function(){
+          if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
+          else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false);
+    </script>
+  </body>
+</html>
