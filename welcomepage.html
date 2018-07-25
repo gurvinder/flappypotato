@@ -2,29 +2,27 @@
 <html lang="en" dir="ltr">
   <head><title>Flappy Potato</title></head>
   <body onload="animate()" style="margin:0;padding:0">
-
-<canvas id="canvas" width=1000 height=700 style="position:relative"></canvas>
-    <script>
+<canvas id="canvas" width=1000 height=700 style="position:relative"></canvas><script>
         let canvas=document.getElementById("canvas");
         canvas.style.left = (window.innerWidth - canvas.width - 8) + "px";
         canvas.style.top = "8px";
         let context = canvas.getContext("2d");
         let frame = 0;
         let horizontalgap = 225;
-        let verticalgap = 0
+        let verticalgap = 200;
         let allObstacles=[];
         let background = new Image()
         let userImage = new Image()
         userImage.src = 'static/imgs/potato.png';
         let userProperties = {x: 0, y: 425, width: 125, height: 125};
         let requestId = undefined;
+        let pipeMin = 50;
 
         function animate(time){
           frame++;
           if(frame == 1 || frame % horizontalgap == 0){
-            //var a = Math.floor(Math.random() * (Math.floor(max) - Math.floor(50))) + Math.floor(50);
-            allObstacles.push({x: canvas.width, y: 0, width:40, height: 175, velocity: -1});
-            allObstacles.push({x: canvas.width, y: canvas.height-195, width:40, height: canvas.height, velocity: -1});}
+            allObstacles.push({x: canvas.width, y: 0, width: 40, height: pipeMin + Math.floor(Math.random() * 350) + 1, velocity: -1});
+            allObstacles.push({x: canvas.width, y: allObstacles[allObstacles.length - 1].height + verticalgap, width:40, height: canvas.height - allObstacles[allObstacles.length - 1].y, velocity: -1});}
 
           for(let i = 0; i < allObstacles.length; i++){
             allObstacles[i].x += allObstacles[i].velocity;}
@@ -32,7 +30,7 @@
           if(allObstacles.length > 15){allObstacles.shift();}
 
           context.clearRect(0, 0, canvas.width, canvas.height);
-          context.fillStyle = "#000000";
+          context.fillStyle = "#1e1e1e";
           context.fillRect(0, 0, canvas.width, canvas.height);
           animateObstacles();
           animateUser();
@@ -41,7 +39,7 @@
 
         function animateObstacles(){
           for(let i = 0; i < allObstacles.length; i++){
-              context.fillStyle = "#00ff00";
+              context.fillStyle = "#228B22";
               context.fillRect(allObstacles[i].x, allObstacles[i].y, allObstacles[i].width, allObstacles[i].height);}}
 
         function animateUser(){context.drawImage(userImage, userProperties.x, userProperties.y, userProperties.width, userProperties.height);}
@@ -59,4 +57,8 @@
               if(isRightCollision && (isTopCollision || isBottomCollision)){return true;}
               if(isLeftCollision && (isTopCollision || isBottomCollision)){return true;}}
             return false;}
+
+          window.addEventListener("resize", function(){
+            if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
+            else{canvas.style.left = (window.innerWidth - canvas.width - 8) + "px";}}, false)
     </script></body></html>
