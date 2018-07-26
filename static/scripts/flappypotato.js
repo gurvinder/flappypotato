@@ -109,7 +109,7 @@ function collisionDetection(){
     if(event.key == "w"){userProperties.y-=30;}
     else if(event.key == "s"){userProperties.y+=30;}});
 
-  //used to adjust spacing between the canvas and sides
-  // window.addEventListener("resize", function(){
-  //   if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
-  //   else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false);
+  used to adjust spacing between the canvas and sides
+  window.addEventListener("resize", function(){
+    if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
+    else{canvas.width = window.innerWidth*(.75); canvas.height = window.innerHeight*(.85);}}, false);

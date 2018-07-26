@@ -21,7 +21,7 @@ canvas{
 #score{
   margin:0;
   padding:0;
-  display:inline-block;
+  display:inline;
   color: white;
   text-align:center;
 }
@@ -29,9 +29,10 @@ canvas{
 #usernameLabel{
   margin:0;
   padding:0;
-  display:inline-block;
+  display:inline;
   color: white;
   font-size: 25px;
+  align-content: center;
 
 }
 .button {
