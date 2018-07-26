@@ -2,13 +2,32 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+    <link rel="stylesheet" href="static/welcomepage.css">
     <title></title>
   </head>
   <body>
       <form action="/game" method="post">
-        <p>Welcome to Flappy Potato!</p>
-        Username:<input type="text" name="username"><br>
-        <button type="submit">Play!</button>
+
+          <!-- Title with dancing potatoes -->
+        <div id="parent2">
+          <img class= "dancingpotato" src="static/imgs/dancingpotato.gif">
+          <p class="spacer"></p>
+          <p class="title">  Welcome to Flappy Potato! </p>
+          <p class="spacer"></p>
+          <img class= "dancingpotato" src="static/imgs/dancingpotato.gif">
+        </div>
+
+        <!-- Username input -->
+        <section>
+          <p class="words">Enter a username:<br>
+          <input type="text" name="username"></p>
+        </section>
+
+        <!-- Button -->
+        <section>
+        <button type="submit" class="button">Play!</button>
+        </section>
       </form>
   </body>
 </html>
