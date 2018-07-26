@@ -10,7 +10,8 @@ body{
   font-size: 50px;
   font-family:'Aclonica' ;
   flex-grow: 1;
-  width: 550px;
+  text-align: center;
+  justify-content: space-around;
 }
 
 .dancingpotato{
@@ -18,10 +19,10 @@ body{
   height: 120px;
 
 }
+#parent2{
+  display: flex;
 
-/* div, div *{
-  border: 1px solid purple;
-} */
+}
 
 div{
   display: flex;
@@ -44,6 +45,7 @@ input {
   transition: all 1s ease;
   height:50px;
   font-size:14pt;
+  text-align: center;
 }
 
 section{
@@ -55,6 +57,12 @@ section{
 .words{
   font-family: "Comic Sans MS";
   font-size: 30px;
+}
+
+.words2{
+  font-family: "Comic Sans MS";
+  font-size: 30px;
+  color: white;
 }
 
 .button {

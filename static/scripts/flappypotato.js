@@ -1,8 +1,8 @@
 //global constants
-let HORIZONTALSPACING = 360;
-let VERTICALGAP = 250;
+let HORIZONTALSPACING = 390;
+let VERTICALGAP = 75 * 3;
 let PIPEMINIMUM = 50;
-let HURDLEVELOCITY = -6;
+let HURDLEVELOCITY = -5;
 let MAXHURDLES = 20;
 
 //graphics elements
@@ -13,7 +13,9 @@ let usernameLabel = document.querySelector("#usernameLabel");
 
 //continuously updated elements
 let allHurdles = [];
-let userProperties = {x: 100, y: 200, width: 100, height: 75, velocity: 0};
+let userProperties = {x: 100, y: 200, width: 75, height: 75, velocity: 0};
+let gravity = -HURDLEVELOCITY*1.15;
+let BOOST = 175;
 
 //interator
 let frame = 0;
@@ -29,11 +31,10 @@ function begin(){
   //canvas location adjustments
   canvas.width = window.innerWidth*(.75);
   canvas.height = window.innerHeight*(.85);
-  userProperties = {x: 100, y: 200, width: 100, height: 75, velocity: 0};
+  userProperties = {x: 100, y: 200, width: 75, height: 75, velocity: gravity};
   allHurdles = [];
   frame = 0;
-  HURDLEVELOCITY = -6;
-  //start flappy bird
+  //start flappy potato
   animate();}
 
 function animate(time){
@@ -42,6 +43,7 @@ function animate(time){
     allHurdles.push({x: canvas.width, y: allHurdles[allHurdles.length - 1].height + VERTICALGAP, width:40, height: canvas.height - allHurdles[allHurdles.length - 1].y, velocity: HURDLEVELOCITY});}
 
   //used to set the score
+  //document.querySelector('#score').innerHTML = "Score: " + frame;
   document.querySelector('#score').innerHTML = "Score: " + Math.floor((frame/(-HURDLEVELOCITY*MAXHURDLES)));
 
   //used to update the spacing after score update
@@ -61,6 +63,14 @@ function animate(time){
 
   //preformes updates to all properties
   animateHurdles();
+
+  // if(frame % 300 == 0){
+  //   userProperties.velocity += (gravity);
+  // }
+  userProperties.velocity += (gravity);
+
+  userProperties.y += userProperties.velocity/-(HURDLEVELOCITY*2.5);
+
   animateUser();
 
   //updates the interator
@@ -82,7 +92,7 @@ function animateHurdles(){
       context.fillRect(allHurdles[i].x, allHurdles[i].y, allHurdles[i].width, allHurdles[i].height);}}
 
 function animateUser(){
-  context.drawImage(userImage, userProperties.x, (userProperties.y), userProperties.width, userProperties.height);}
+  context.drawImage(userImage, userProperties.x, userProperties.y, userProperties.width, userProperties.height);}
 
 function collisionDetection(){
   //anchors used for hitbox detection
@@ -106,10 +116,9 @@ function collisionDetection(){
 
   //used to update user properties
   document.addEventListener('keydown',(event)=>{
-    if(event.key == "w"){userProperties.y-=30;}
-    else if(event.key == "s"){userProperties.y+=30;}});
+    if(event.key == " "){userProperties.velocity-=BOOST;}});
 
   //used to adjust spacing between the canvas and sides
-  // window.addEventListener("resize", function(){
-  //   if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
-  //   else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false);
+  window.addEventListener("resize", function(){
+    if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
+    else{canvas.width = window.innerWidth*(.75); canvas.height = window.innerHeight*(.85);}}, false);
