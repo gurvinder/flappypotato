@@ -1,5 +1,5 @@
 //global constants
-let HORIZONTALSPACING = 300;
+let HORIZONTALSPACING = 360;
 let VERTICALGAP = 250;
 let PIPEMINIMUM = 50;
 let HURDLEVELOCITY = -6;
@@ -27,8 +27,8 @@ userImage.src = 'static/imgs/potato.png';
 
 function begin(){
   //canvas location adjustments
-  canvas.width = document.innerWidth*(.75);
-  canvas.height = document.innerHeight*(.85);
+  canvas.width = window.innerWidth*(.75);
+  canvas.height = window.innerHeight*(.85);
   userProperties = {x: 100, y: 200, width: 100, height: 75, velocity: 0};
   allHurdles = [];
   frame = 0;
@@ -38,7 +38,7 @@ function begin(){
 
 function animate(time){
   if((frame == 0) || (frame % (HORIZONTALSPACING) == 0)){
-    allHurdles.push({x: canvas.width, y: 0, width: 40, height: PIPEMINIMUM + Math.floor(Math.random() * 400) + 1, velocity: HURDLEVELOCITY});
+    allHurdles.push({x: canvas.width, y: 0, width: 40, height: PIPEMINIMUM + Math.floor(Math.random() * (canvas.width/2.25)) + 1, velocity: HURDLEVELOCITY});
     allHurdles.push({x: canvas.width, y: allHurdles[allHurdles.length - 1].height + VERTICALGAP, width:40, height: canvas.height - allHurdles[allHurdles.length - 1].y, velocity: HURDLEVELOCITY});}
 
   //used to set the score
