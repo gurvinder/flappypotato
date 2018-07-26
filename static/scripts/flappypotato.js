@@ -3,7 +3,7 @@ let HORIZONTALSPACING = 300;
 let VERTICALGAP = 250;
 let PIPEMINIMUM = 50;
 let HURDLEVELOCITY = -6;
-let MAXHURDLES = 100;
+let MAXHURDLES = 20;
 
 //graphics elements
 let canvas = document.getElementById("canvas");
@@ -29,10 +29,10 @@ function begin(){
   //canvas location adjustments
   canvas.style.left = (window.innerWidth - canvas.width - scoreLabel.offsetWidth - 8) + "px";
   canvas.style.top = "8px";
-
+  userProperties = {x: 100, y: 200, width: 100, height: 75, velocity: 0};
   allHurdles = [];
   frame = 0;
-
+  HURDLEVELOCITY = -6;
   //start flappy bird
   animate();}
 
@@ -42,7 +42,7 @@ function animate(time){
     allHurdles.push({x: canvas.width, y: allHurdles[allHurdles.length - 1].height + VERTICALGAP, width:40, height: canvas.height - allHurdles[allHurdles.length - 1].y, velocity: HURDLEVELOCITY});}
 
   //used to set the score
-  document.querySelector('#score').innerHTML = "Score: " + frame;
+  document.querySelector('#score').innerHTML = "Score: " + Math.floor((frame/(-HURDLEVELOCITY*MAXHURDLES)));
 
   //used to update the spacing after score update
   canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";

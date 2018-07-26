@@ -20,7 +20,13 @@ class GamePage(webapp2.RequestHandler):
         self.response.write(template.render(template_vars))
 
     def post(self):
-        User(username=self.request.get('username')[10:], score=int(self.request.get("score")[7:])).put()
+        if User.query(User.username == self.request.get('username')[10:]).get():
+            returningUser = User.query(User.username == self.request.get('username')[10:]).get()
+            if int(self.request.get("score")[7:]) > returningUser.score:
+                returningUser.score = int(self.request.get("score")[7:])
+                returningUser.put()
+        else:
+            User(username=self.request.get('username')[10:], score=int(self.request.get("score")[7:])).put()
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_current_directory.get_template('flappypotato.html')
         self.response.write(template.render())
