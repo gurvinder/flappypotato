@@ -27,8 +27,8 @@ userImage.src = 'static/imgs/potato.png';
 
 function begin(){
   //canvas location adjustments
-  canvas.width = screen.width*(.75);
-  canvas.height = screen.height*(.85);
+  canvas.width = window.innerWidth*(.75);
+  canvas.height = window.innerHeight*(.85);
   //canvas.style.left = (window.innerWidth - canvas.width - usernameLabel.offsetWidth - 8) + "px";
   canvas.style.left = "8px";
   canvas.style.top = "8px";
