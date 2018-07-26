@@ -27,11 +27,8 @@ userImage.src = 'static/imgs/potato.png';
 
 function begin(){
   //canvas location adjustments
-  canvas.width = screen.width*(.75);
-  canvas.height = screen.height*(.85);
-  //canvas.style.left = (window.innerWidth - canvas.width - usernameLabel.offsetWidth - 8) + "px";
-  canvas.style.left = "8px";
-  canvas.style.top = "8px";
+  canvas.width = document.innerWidth*(.75);
+  canvas.height = document.innerHeight*(.85);
   userProperties = {x: 100, y: 200, width: 100, height: 75, velocity: 0};
   allHurdles = [];
   frame = 0;
