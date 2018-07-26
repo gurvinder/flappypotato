@@ -4,12 +4,12 @@
     <title>Flappy Potato</title>
     <link rel="stylesheet" href="static/styles/flappypotato.css"
   </head>
-  <body onload="animate()" >
-    <button onclick="begin()" value="Restart"></button>
+  <body onload="begin()">
       <div>
         <h2 id="usernameLabel">Username: {{username}}</h2>
         <br>
-        <h1 id="score">Score:</h1>
+        <h1 id="score">Score:</h1><br>
+        <button onclick="begin()" value="Restart">Restart</button>
       </div>
     <canvas id="canvas" width=1000 height=650 ></canvas>
     <script type="text/javascript" src="static/scripts/flappypotato.js"></script>
