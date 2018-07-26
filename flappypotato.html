@@ -5,12 +5,15 @@
     <link rel="stylesheet" href="static/styles/flappypotato.css"
   </head>
   <body onload="begin()">
-      <div>
-        <h2 id="usernameLabel">Username: {{username}}</h2>
-        <h1 id="score">Score:</h1><br>
-        <button onclick="begin()" class="button">Restart</button>
+      <div id="scoreboard">
+        <h2 id="usernameLabel"> Username: {{username}} </h2>
+        <h2 id="score">Score:</h2>
       </div>
-    <canvas id="canvas"></canvas>
+      <button onclick="begin()" class="button">Restart!</button>
+      <br>
+    <section>
+      <canvas id="canvas"></canvas>
+    </section>
     <script type="text/javascript" src="static/scripts/flappypotato.js"></script>
   </body>
 </html>
