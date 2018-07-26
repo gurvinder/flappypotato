@@ -1,5 +1,5 @@
 //global constants
-let HORIZONTALSPACING = 300;
+let HORIZONTALSPACING = 360;
 let VERTICALGAP = 250;
 let PIPEMINIMUM = 50;
 let HURDLEVELOCITY = -6;
@@ -29,9 +29,6 @@ function begin(){
   //canvas location adjustments
   canvas.width = window.innerWidth*(.75);
   canvas.height = window.innerHeight*(.85);
-  //canvas.style.left = (window.innerWidth - canvas.width - usernameLabel.offsetWidth - 8) + "px";
-  canvas.style.left = "8px";
-  canvas.style.top = "8px";
   userProperties = {x: 100, y: 200, width: 100, height: 75, velocity: 0};
   allHurdles = [];
   frame = 0;
@@ -41,7 +38,7 @@ function begin(){
 
 function animate(time){
   if((frame == 0) || (frame % (HORIZONTALSPACING) == 0)){
-    allHurdles.push({x: canvas.width, y: 0, width: 40, height: PIPEMINIMUM + Math.floor(Math.random() * 400) + 1, velocity: HURDLEVELOCITY});
+    allHurdles.push({x: canvas.width, y: 0, width: 40, height: PIPEMINIMUM + Math.floor(Math.random() * (canvas.width/2.25)) + 1, velocity: HURDLEVELOCITY});
     allHurdles.push({x: canvas.width, y: allHurdles[allHurdles.length - 1].height + VERTICALGAP, width:40, height: canvas.height - allHurdles[allHurdles.length - 1].y, velocity: HURDLEVELOCITY});}
 
   //used to set the score
@@ -112,7 +109,7 @@ function collisionDetection(){
     if(event.key == "w"){userProperties.y-=30;}
     else if(event.key == "s"){userProperties.y+=30;}});
 
-  //used to adjust spacing between the canvas and sides
-  // window.addEventListener("resize", function(){
-  //   if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
-  //   else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false);
+  used to adjust spacing between the canvas and sides
+  window.addEventListener("resize", function(){
+    if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
+    else{canvas.width = window.innerWidth*(.75); canvas.height = window.innerHeight*(.85);}}, false);

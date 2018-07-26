@@ -25,7 +25,7 @@ section{
 #score{
   margin:0;
   padding:0;
-  display:inline-block;
+  display:inline;
   color: white;
 }
 
@@ -38,9 +38,10 @@ section{
 #usernameLabel{
   margin:0;
   padding:0;
-  display:inline-block;
+  display:inline;
   color: white;
   font-size: 25px;
+  align-content: center;
 
 }
 .button {
