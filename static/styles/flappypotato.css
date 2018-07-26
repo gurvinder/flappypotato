@@ -1,0 +1,29 @@
+body{
+  margin:0;
+  padding:0;
+  display:inline-block;
+  background-image: url('https://www.girlcharlee.com/images/knit/CL-2682-main.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+canvas{
+  position:relative;
+}
+
+#score{
+  margin:0;
+  padding:0;
+  display:inline-block;
+  color: white;
+}
+
+#usernameLabel{
+  margin:0;
+  padding:0;
+  display:inline-block;
+  color: white;
+
+}
