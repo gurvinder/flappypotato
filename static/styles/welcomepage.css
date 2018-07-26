@@ -59,6 +59,12 @@ section{
   font-size: 30px;
 }
 
+.words2{
+  font-family: "Comic Sans MS";
+  font-size: 30px;
+  color: white;
+}
+
 .button {
   background-color: #1F2421;
   border: none;
