@@ -27,7 +27,8 @@ userImage.src = 'static/imgs/potato.png';
 
 function begin(){
   //canvas location adjustments
-  canvas.style.left = (window.innerWidth - canvas.width - scoreLabel.offsetWidth - 8) + "px";
+  //canvas.style.left = (window.innerWidth - canvas.width - usernameLabel.offsetWidth - 8) + "px";
+  canvas.style.left = "8px";
   canvas.style.top = "8px";
   userProperties = {x: 100, y: 200, width: 100, height: 75, velocity: 0};
   allHurdles = [];
@@ -45,7 +46,7 @@ function animate(time){
   document.querySelector('#score').innerHTML = "Score: " + Math.floor((frame/(-HURDLEVELOCITY*MAXHURDLES)));
 
   //used to update the spacing after score update
-  canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";
+  //canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";
 
   //used to update positions of all hurdles based on velocity
   for(let i = 0; i < allHurdles.length; i++){allHurdles[i].x += allHurdles[i].velocity;}
@@ -110,6 +111,6 @@ function collisionDetection(){
     else if(event.key == "s"){userProperties.y+=30;}});
 
   //used to adjust spacing between the canvas and sides
-  window.addEventListener("resize", function(){
-    if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
-    else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false);
+  // window.addEventListener("resize", function(){
+  //   if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
+  //   else{canvas.style.left = (window.innerWidth - canvas.width - document.querySelector('#score').offsetWidth - 8) + "px";}}, false);
