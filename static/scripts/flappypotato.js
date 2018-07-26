@@ -9,6 +9,7 @@ let MAXHURDLES = 100;
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
 let scoreLabel = document.querySelector('#score');
+let usernameLabel = document.querySelector("#usernameLabel");
 
 //continuously updated elements
 let allHurdles = [];
@@ -66,7 +67,14 @@ function animate(time){
   frame += -(HURDLEVELOCITY);
 
   //checks if any objects have collided and determines if loop should continue
-  if(!collisionDetection()){window.requestAnimationFrame(animate);}}
+  if(!collisionDetection()){
+    window.requestAnimationFrame(animate);
+  }else{saveData();}}
+
+function saveData(){
+  const url = "/game?username="+ usernameLabel.innerHTML + "&score=" + scoreLabel.innerHTML;
+  const options = {method: "POST", credentials: "same-origin"}
+  fetch(new Request(url, options))}
 
 function animateHurdles(){
   for(let i = 0; i < allHurdles.length; i++){

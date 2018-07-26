@@ -1,5 +1,5 @@
 document.querySelector("#playbutton").addEventListener('click', () => {
-  const url = "/todo?username="+ document.querySelector("#username");
+  const url = "/game?username="+ document.querySelector("#username");
   options = {method: "GET", credentials: "same-origin"}
   fetch(new Request(url, options));
 });
