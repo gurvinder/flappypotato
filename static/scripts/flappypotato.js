@@ -116,6 +116,8 @@ function collisionDetection(){
   document.addEventListener('keydown',(event)=>{
     if(event.key == " "){userProperties.velocity-=BOOST;}});
 
+  function reload(){window.location.reload(true);}
+
   //used to adjust spacing between the canvas and sides
   window.addEventListener("resize", function(){
     if(window.innerWidth < canvas.width){alert("Your window is too small to play Flappy Potato")}
