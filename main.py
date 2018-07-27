@@ -16,7 +16,7 @@ class WelcomePage(webapp2.RequestHandler):
 class GamePage(webapp2.RequestHandler):
     def get(self):
         if Visitor.query(Visitor.plays > 0).get():
-            newVisitor = Visitor.query(Visitor.plays >= 0).get()
+            newVisitor = Visitor.query(Visitor.plays > 0).get()
             newVisitor.plays += 1
             newVisitor.put()
         else:
