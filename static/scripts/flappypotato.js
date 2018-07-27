@@ -31,7 +31,7 @@ function begin(){
   //canvas location adjustments
   canvas.width = window.innerWidth*(.75);
   canvas.height = window.innerHeight*(.85);
-  userProperties = {x: 100, y: 200, width: 75, height: 75, velocity: gravity};
+  userProperties = {x: 100, y: 200, width: 70, height: 70, velocity: gravity};
   allHurdles = [];
   frame = 0;
   //start flappy potato
@@ -64,12 +64,9 @@ function animate(time){
   //preformes updates to all properties
   animateHurdles();
 
-  // if(frame % 300 == 0){
-  //   userProperties.velocity += (gravity);
-  // }
   userProperties.velocity += (gravity);
 
-  userProperties.y += userProperties.velocity/-(HURDLEVELOCITY*2.5);
+  userProperties.y += userProperties.velocity/-(HURDLEVELOCITY*3);
 
   animateUser();
 
