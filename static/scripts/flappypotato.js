@@ -28,6 +28,7 @@ let userImage = new Image(userProperties.width, userProperties.height);
 userImage.src = 'static/imgs/potato.png';
 
 function begin(){
+  document.querySelector("#GameAudio").volume = 0.25;
   //canvas location adjustments
   canvas.width = window.innerWidth*(.75);
   canvas.height = window.innerHeight*(.85);
