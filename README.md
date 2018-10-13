@@ -20,7 +20,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Deployment ###
 * Open your text editor or IDE of choice
-* Testing
+* Testing and Debugging
   * [Local Development Server](https://cloud.google.com/appengine/docs/standard/python/tools/using-local-server) - run the dev_appserver.py command from the directory that contains your app's configuration file:
     `dev_appserver.py configuration-file.yaml`
   * [Deploying to App Engine](https://cloud.google.com/appengine/docs/standard/python/tools/uploadinganapp) - run the gcloud app deploy command from within the root directory of your application where your configuration file(s) are located: ```gcloud app deploy configuration-file.yaml```
