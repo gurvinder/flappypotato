@@ -6,7 +6,7 @@ This is the code for Flappy Potato as written by Gurvinder Singh, Sandra Ibrahim
 * [Getting Started](#getting-started)
 * [Prerequisites](#prerequisites)
   * Install Python
-  * Install Install Google Cloud SDK
+  * Install Google Cloud SDK
 * [Deployment](#deployment)
 * [Built With](#built-with)
   * Jinja2
