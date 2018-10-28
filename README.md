@@ -1,7 +1,7 @@
 <img src="http://techfutures.org/wp-content/uploads/2016/01/cssi-2.jpg"/>
 
 ## Google Computer Science Summer Institute(CSSI) Final Project: Flappy Potato
-This is the code for Flappy Potato as written by Gurvinder Singh, Sandra Ibrahim, and Jonathan Edwards. This project was completed during our tenure at CSSI NYC 2018. This project has been / will be updated for various reasons including but not limited to feature additions, bug fixes, etc.
+This project was completed during our tenure at CSSI NYC 2018. This project has been / will be updated for various reasons including but not limited to feature additions, bug fixes, etc.
 
 * [Getting Started](#getting-started)
 * [Prerequisites](#prerequisites)
@@ -12,10 +12,6 @@ This is the code for Flappy Potato as written by Gurvinder Singh, Sandra Ibrahim
   * Jinja2
   * Webapp2
   * NDB
-* [Authors](#authors)
-  * Jonathan Edwards
-  * Sandra Ibrahim
-  * Gurvinder Singh
 * [License](#license)
 
 ### Getting Started ###
@@ -41,10 +37,7 @@ These instructions will get you a copy of the project up and running on your loc
 * [Webapp2](https://webapp2.readthedocs.io/en/latest/) - Lightweight Python web framework.
 * [NDB](https://cloud.google.com/appengine/docs/standard/python/ndb/) - Google Datastore NDB Client Library used for storing names & scores.
 
-### Authors ###
-* [Jonathan Edwards](https://github.com/jonthnedw)
-* [Sandra Ibrahim](https://github.com/sandraibrahim)
-* [Gurvinder Singh](https://github.com/tubbyyyy)
-
 ### License ###
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more details.
+- - - -
+_a project by [Jonathan Edwards](https://github.com/jonthnedw), [Sandra Ibrahim](https://github.com/sandraibrahim), [Gurvinder Singh](https://github.com/tubbyyyy)_
