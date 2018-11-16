@@ -38,6 +38,6 @@ These instructions will get you a copy of the project up and running on your loc
 * [NDB](https://cloud.google.com/appengine/docs/standard/python/ndb/) - Google Datastore NDB Client Library used for storing names & scores.
 
 ### License ###
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for more details.
 - - - -
 _a project by [Jonathan Edwards](https://github.com/jonthnedw), [Sandra Ibrahim](https://github.com/sandraibrahim), and [Gurvinder Singh](https://github.com/tubbyyyy)_
