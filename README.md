@@ -1,9 +1,9 @@
 <img src="http://techfutures.org/wp-content/uploads/2016/01/cssi-2.jpg"/>
 
 ## Google Computer Science Summer Institute(CSSI) Final Project: Flappy Potato
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Python 2.7](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/downloads/release/python-270/) [![Jinja2](https://img.shields.io/badge/Jinja2-tested-brightgreen.svg)](http://jinja.pocoo.org/docs) [![Webapp2](https://img.shields.io/badge/Webapp2-tested-brightgreen.svg)](https://github.com/GoogleCloudPlatform/webapp2) [![NDB](https://img.shields.io/badge/NDB-tested-brightgreen.svg)](https://cloud.google.com/appengine/docs/standard/python/ndb/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Python 2.7](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/downloads/release/python-270/) [![Jinja2](https://img.shields.io/badge/Jinja2-tested-brightgreen.svg)](http://jinja.pocoo.org/docs) [![Webapp2](https://img.shields.io/badge/Webapp2-tested-brightgreen.svg)](https://webapp2.readthedocs.io/en/latest/) [![NDB](https://img.shields.io/badge/NDB-tested-brightgreen.svg)](https://cloud.google.com/appengine/docs/standard/python/ndb/)
 
-This project was completed during our tenure at CSSI NYC 2018. This project has been/will be updated for various reasons including but not limited to feature additions, bug fixes, etc.
+This project was completed during our tenure at CSSI NYC 2018. This project has been/will be updated for various reasons including but not limited to feature additions, bug fixes, etc...
 
 * [Getting Started](#getting-started)
 * [Prerequisites](#prerequisites)
